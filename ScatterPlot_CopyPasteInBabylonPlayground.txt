@@ -1,0 +1,458 @@
+
+let W = 180,
+    H = 180,
+    D = 300;
+
+//converted from csv to json
+//var inputData =[{"year":2017,"t1":29,"t2":29,"t3":28,"t4":27,"t5":27,"t6":26,"t7":26,"t8":26,"t9":26,"t10":27,"t11":29,"t12":29,"t13":28,"t14":28,"t15":29,"t16":31,"t17":32,"t18":33,"t19":34,"t20":35,"t21":35,"t22":35,"t23":36,"t24":37,"t25":37,"t26":35,"t27":35,"t28":34,"t29":34,"t30":33,"t31":31}, {"year":2016,"t1":28,"t2":28,"t3":27,"t4":26,"t5":26,"t6":25,"t7":25,"t8":25,"t9":25,"t10":26,"t11":27,"t12":27,"t13":28,"t14":28,"t15":29,"t16":30,"t17":31,"t18":32,"t19":33,"t20":34,"t21":34,"t22":35,"t23":36,"t24":37,"t25":36,"t26":34,"t27":34,"t28":33,"t29":33,"t30":32,"t31":31}, {"year":2015,"t1":27,"t2":27,"t3":27,"t4":26,"t5":25,"t6":25,"t7":25,"t8":25,"t9":25,"t10":25,"t11":27,"t12":27,"t13":27,"t14":27,"t15":28,"t16":29,"t17":30,"t18":31,"t19":32,"t20":33,"t21":33,"t22":34,"t23":35,"t24":36,"t25":35,"t26":34,"t27":33,"t28":32,"t29":32,"t30":31,"t31":30}, {"year":2014,"t1":27,"t2":27,"t3":27,"t4":26,"t5":25,"t6":25,"t7":25,"t8":25,"t9":25,"t10":25,"t11":26,"t12":26,"t13":27,"t14":26,"t15":27,"t16":28,"t17":29,"t18":30,"t19":31,"t20":32,"t21":32,"t22":33,"t23":35,"t24":35,"t25":34,"t26":33,"t27":32,"t28":31,"t29":31,"t30":30,"t31":29},{"year":2013,"t1":27,"t2":27,"t3":27,"t4":26,"t5":25,"t6":25,"t7":25,"t8":25,"t9":26,"t10":25,"t11":27,"t12":27,"t13":27,"t14":27,"t15":28,"t16":29,"t17":30,"t18":31,"t19":32,"t20":33,"t21":33,"t22":34,"t23":35,"t24":36,"t25":35,"t26":34,"t27":33,"t28":32,"t29":32,"t30":31,"t31":30}, {"year":2012,"t1":28,"t2":28,"t3":27,"t4":26,"t5":26,"t6":25,"t7":25,"t8":25,"t9":25,"t10":26,"t11":27,"t12":27,"t13":28,"t14":28,"t15":29,"t16":30,"t17":31,"t18":32,"t19":33,"t20":34,"t21":34,"t22":35,"t23":36,"t24":37,"t25":36,"t26":34,"t27":34,"t28":33,"t29":33,"t30":32,"t31":31}, {"year":2011,"t1":29,"t2":29,"t3":28,"t4":27,"t5":27,"t6":26,"t7":26,"t8":26,"t9":26,"t10":27,"t11":29,"t12":29,"t13":28,"t14":28,"t15":29,"t16":31,"t17":32,"t18":33,"t19":34,"t20":35,"t21":35,"t22":35,"t23":36,"t24":37,"t25":37,"t26":35,"t27":35,"t28":34,"t29":34,"t30":33,"t31":31}, {"year":2010,"t1":30,"t2":30,"t3":29,"t4":28,"t5":28,"t6":27,"t7":27,"t8":27,"t9":27,"t10":28,"t11":30,"t12":30,"t13":29,"t14":29,"t15":30,"t16":31,"t17":32,"t18":34,"t19":35,"t20":36,"t21":36,"t22":36,"t23":37,"t24":36,"t25":36,"t26":35,"t27":36,"t28":34,"t29":33,"t30":32,"t31":30},{"year":2009,"t1":31,"t2":31,"t3":30,"t4":29,"t5":29,"t6":28,"t7":28,"t8":28,"t9":28,"t10":29,"t11":31,"t12":31,"t13":30,"t14":30,"t15":31,"t16":32,"t17":33,"t18":34,"t19":35,"t20":36,"t21":37,"t22":37,"t23":37,"t24":36,"t25":35,"t26":35,"t27":34,"t28":33,"t29":32,"t30":31,"t31":29}, {"year":2008,"t1":32,"t2":32,"t3":31,"t4":30,"t5":30,"t6":29,"t7":29,"t8":29,"t9":29,"t10":30,"t11":32,"t12":32,"t13":31,"t14":31,"t15":32,"t16":33,"t17":34,"t18":35,"t19":36,"t20":37,"t21":37,"t22":37,"t23":37,"t24":37,"t25":35,"t26":35,"t27":34,"t28":32,"t29":31,"t30":30,"t31":29}, {"year":2007,"t1":32,"t2":32,"t3":31,"t4":30,"t5":30,"t6":29,"t7":29,"t8":29,"t9":29,"t10":30,"t11":32,"t12":32,"t13":31,"t14":31,"t15":32,"t16":33,"t17":34,"t18":35,"t19":36,"t20":37,"t21":37,"t22":37,"t23":37,"t24":37,"t25":35,"t26":35,"t27":34,"t28":32,"t29":31,"t30":30,"t31":29}, {"year":2006,"t1":30,"t2":30,"t3":29,"t4":28,"t5":28,"t6":27,"t7":27,"t8":27,"t9":27,"t10":28,"t11":30,"t12":30,"t13":29,"t14":29,"t15":30,"t16":31,"t17":32,"t18":34,"t19":35,"t20":36,"t21":36,"t22":36,"t23":37,"t24":36,"t25":36,"t26":35,"t27":36,"t28":34,"t29":33,"t30":32,"t31":30}];
+var inputData = [{"year": 2000, "t0": 13, "t1": 18, "t2": 23, "t3": 19, "t4": 9, "t5": 9, "t6": 13, "t7": 14, "t8": 9, "t9": 8, "t10": 18, "t11": 10, "t12": 0, "t13": 11, "t14": 10, "t15": 14, "t16": 11, "t17": 0, "t18": 11, "t19": 11, "t20": 10, "t21": 18, "t22": 12, "t23": 8, "t24": 7, "t25": 11, "t26": 6, "t27": 19, "t28": 12, "t29": 0, "t30": 8, "t31": 0, "t32": 6, "t33": 14, "t34": 15, "t35": 13, "t36": 12, "t37": 11, "t38": 9, "t39": 9, "t40": 8, "t41": 9, "t42": 10, "t43": 0, "t44": 15, "t45": 10, "t46": 23, "t47": 10, "t48": 0, "t49": 17, "t50": 11, "t51": 9}, {"year": 2001, "t0": 14, "t1": 20, "t2": 24, "t3": 22, "t4": 10, "t5": 9, "t6": 14, "t7": 17, "t8": 9, "t9": 8, "t10": 19, "t11": 10, "t12": 0, "t13": 12, "t14": 11, "t15": 15, "t16": 12, "t17": 0, "t18": 11, "t19": 11, "t20": 11, "t21": 20, "t22": 14, "t23": 9, "t24": 7, "t25": 13, "t26": 6, "t27": 21, "t28": 13, "t29": 0, "t30": 9, "t31": 0, "t32": 6, "t33": 15, "t34": 15, "t35": 15, "t36": 13, "t37": 12, "t38": 9, "t39": 10, "t40": 8, "t41": 9, "t42": 13, "t43": 0, "t44": 17, "t45": 11, "t46": 26, "t47": 10, "t48": 0, "t49": 18, "t50": 12, "t51": 9}, {"year": 2002, "t0": 15, "t1": 22, "t2": 27, "t3": 25, "t4": 10, "t5": 9, "t6": 14, "t7": 18, "t8": 9, "t9": 9, "t10": 19, "t11": 10, "t12": 0, "t13": 12, "t14": 11, "t15": 17, "t16": 13, "t17": 0, "t18": 12, "t19": 12, "t20": 11, "t21": 21, "t22": 15, "t23": 10, "t24": 7, "t25": 14, "t26": 6, "t27": 24, "t28": 14, "t29": 0, "t30": 9, "t31": 17, "t32": 7, "t33": 15, "t34": 16, "t35": 17, "t36": 14, "t37": 13, "t38": 10, "t39": 10, "t40": 9, "t41": 10, "t42": 13, "t43": 15, "t44": 20, "t45": 13, "t46": 28, "t47": 10, "t48": 0, "t49": 20, "t50": 12, "t51": 10}, {"year": 2003, "t0": 16, "t1": 25, "t2": 30, "t3": 28, "t4": 10, "t5": 10, "t6": 14, "t7": 19, "t8": 10, "t9": 9, "t10": 19, "t11": 10, "t12": 0, "t13": 13, "t14": 11, "t15": 19, "t16": 13, "t17": 11, "t18": 14, "t19": 12, "t20": 11, "t21": 22, "t22": 16, "t23": 10, "t24": 7, "t25": 16, "t26": 7, "t27": 28, "t28": 15, "t29": 0, "t30": 9, "t31": 18, "t32": 7, "t33": 16, "t34": 17, "t35": 20, "t36": 16, "t37": 14, "t38": 10, "t39": 10, "t40": 10, "t41": 10, "t42": 14, "t43": 15, "t44": 24, "t45": 14, "t46": 32, "t47": 10, "t48": 0, "t49": 22, "t50": 13, "t51": 11}, {"year": 2004, "t0": 17, "t1": 28, "t2": 35, "t3": 31, "t4": 11, "t5": 10, "t6": 14, "t7": 20, "t8": 10, "t9": 11, "t10": 19, "t11": 11, "t12": 0, "t13": 15, "t14": 10, "t15": 23, "t16": 14, "t17": 11, "t18": 15, "t19": 13, "t20": 12, "t21": 23, "t22": 17, "t23": 11, "t24": 8, "t25": 18, "t26": 7, "t27": 33, "t28": 17, "t29": 0, "t30": 10, "t31": 20, "t32": 7, "t33": 18, "t34": 18, "t35": 23, "t36": 18, "t37": 15, "t38": 10, "t39": 11, "t40": 11, "t41": 11, "t42": 14, "t43": 16, "t44": 28, "t45": 16, "t46": 40, "t47": 10, "t48": 0, "t49": 28, "t50": 13, "t51": 12}, {"year": 2005, "t0": 19, "t1": 32, "t2": 43, "t3": 35, "t4": 11, "t5": 10, "t6": 15, "t7": 23, "t8": 11, "t9": 12, "t10": 19, "t11": 11, "t12": 0, "t13": 19, "t14": 11, "t15": 27, "t16": 15, "t17": 12, "t18": 19, "t19": 13, "t20": 12, "t21": 24, "t22": 18, "t23": 11, "t24": 8, "t25": 20, "t26": 8, "t27": 41, "t28": 19, "t29": 23, "t30": 10, "t31": 22, "t32": 7, "t33": 21, "t34": 21, "t35": 27, "t36": 22, "t37": 18, "t38": 11, "t39": 11, "t40": 12, "t41": 11, "t42": 15, "t43": 17, "t44": 32, "t45": 18, "t46": 51, "t47": 11, "t48": 0, "t49": 35, "t50": 14, "t51": 13}, {"year": 2006, "t0": 21, "t1": 34, "t2": 47, "t3": 36, "t4": 11, "t5": 11, "t6": 17, "t7": 25, "t8": 11, "t9": 12, "t10": 21, "t11": 12, "t12": 15, "t13": 23, "t14": 11, "t15": 31, "t16": 16, "t17": 13, "t18": 23, "t19": 13, "t20": 12, "t21": 26, "t22": 18, "t23": 12, "t24": 9, "t25": 21, "t26": 8, "t27": 46, "t28": 21, "t29": 24, "t30": 10, "t31": 24, "t32": 8, "t33": 25, "t34": 24, "t35": 31, "t36": 25, "t37": 19, "t38": 12, "t39": 11, "t40": 13, "t41": 12, "t42": 17, "t43": 18, "t44": 33, "t45": 18, "t46": 60, "t47": 12, "t48": 0, "t49": 37, "t50": 15, "t51": 15}, {"year": 2007, "t0": 21, "t1": 34, "t2": 42, "t3": 35, "t4": 11, "t5": 12, "t6": 17, "t7": 26, "t8": 12, "t9": 13, "t10": 30, "t11": 13, "t12": 16, "t13": 23, "t14": 11, "t15": 30, "t16": 16, "t17": 11, "t18": 22, "t19": 13, "t20": 12, "t21": 28, "t22": 18, "t23": 13, "t24": 9, "t25": 21, "t26": 8, "t27": 44, "t28": 22, "t29": 22, "t30": 11, "t31": 26, "t32": 8, "t33": 27, "t34": 26, "t35": 31, "t36": 25, "t37": 19, "t38": 12, "t39": 12, "t40": 13, "t41": 12, "t42": 18, "t43": 19, "t44": 31, "t45": 19, "t46": 61, "t47": 12, "t48": 0, "t49": 33, "t50": 16, "t51": 15}, {"year": 2008, "t0": 20, "t1": 32, "t2": 35, "t3": 33, "t4": 11, "t5": 12, "t6": 16, "t7": 26, "t8": 12, "t9": 13, "t10": 31, "t11": 13, "t12": 16, "t13": 20, "t14": 11, "t15": 29, "t16": 15, "t17": 10, "t18": 18, "t19": 12, "t20": 12, "t21": 28, "t22": 17, "t23": 13, "t24": 9, "t25": 20, "t26": 8, "t27": 39, "t28": 22, "t29": 21, "t30": 11, "t31": 26, "t32": 8, "t33": 25, "t34": 25, "t35": 28, "t36": 24, "t37": 19, "t38": 12, "t39": 12, "t40": 14, "t41": 12, "t42": 19, "t43": 20, "t44": 29, "t45": 18, "t46": 59, "t47": 13, "t48": 0, "t49": 27, "t50": 16, "t51": 15}, {"year": 2009, "t0": 18, "t1": 29, "t2": 28, "t3": 31, "t4": 10, "t5": 11, "t6": 14, "t7": 26, "t8": 11, "t9": 12, "t10": 26, "t11": 11, "t12": 15, "t13": 17, "t14": 11, "t15": 26, "t16": 13, "t17": 12, "t18": 15, "t19": 11, "t20": 10, "t21": 28, "t22": 16, "t23": 13, "t24": 9, "t25": 19, "t26": 8, "t27": 34, "t28": 22, "t29": 23, "t30": 10, "t31": 21, "t32": 8, "t33": 21, "t34": 21, "t35": 24, "t36": 22, "t37": 17, "t38": 11, "t39": 11, "t40": 13, "t41": 10, "t42": 20, "t43": 26, "t44": 26, "t45": 17, "t46": 53, "t47": 12, "t48": 16, "t49": 18, "t50": 15, "t51": 13}, {"year": 2010, "t0": 17, "t1": 28, "t2": 28, "t3": 31, "t4": 10, "t5": 11, "t6": 13, "t7": 26, "t8": 10, "t9": 11, "t10": 24, "t11": 10, "t12": 15, "t13": 15, "t14": 11, "t15": 25, "t16": 13, "t17": 12, "t18": 14, "t19": 10, "t20": 10, "t21": 26, "t22": 15, "t23": 12, "t24": 8, "t25": 18, "t26": 8, "t27": 34, "t28": 21, "t29": 22, "t30": 10, "t31": 17, "t32": 8, "t33": 20, "t34": 20, "t35": 22, "t36": 20, "t37": 16, "t38": 11, "t39": 11, "t40": 13, "t41": 10, "t42": 18, "t43": 25, "t44": 25, "t45": 17, "t46": 52, "t47": 11, "t48": 15, "t49": 16, "t50": 15, "t51": 13}, {"year": 2011, "t0": 16, "t1": 26, "t2": 26, "t3": 30, "t4": 9, "t5": 10, "t6": 13, "t7": 26, "t8": 9, "t9": 10, "t10": 23, "t11": 10, "t12": 15, "t13": 13, "t14": 11, "t15": 23, "t16": 12, "t17": 12, "t18": 13, "t19": 9, "t20": 10, "t21": 25, "t22": 14, "t23": 12, "t24": 8, "t25": 18, "t26": 8, "t27": 33, "t28": 21, "t29": 21, "t30": 10, "t31": 16, "t32": 8, "t33": 18, "t34": 18, "t35": 21, "t36": 19, "t37": 15, "t38": 10, "t39": 11, "t40": 12, "t41": 9, "t42": 17, "t43": 23, "t44": 24, "t45": 16, "t46": 51, "t47": 10, "t48": 16, "t49": 14, "t50": 14, "t51": 12}, {"year": 2012, "t0": 16, "t1": 25, "t2": 25, "t3": 29, "t4": 9, "t5": 10, "t6": 13, "t7": 26, "t8": 9, "t9": 10, "t10": 23, "t11": 10, "t12": 14, "t13": 14, "t14": 11, "t15": 22, "t16": 12, "t17": 10, "t18": 12, "t19": 9, "t20": 10, "t21": 25, "t22": 13, "t23": 12, "t24": 8, "t25": 17, "t26": 8, "t27": 33, "t28": 21, "t29": 20, "t30": 10, "t31": 15, "t32": 8, "t33": 18, "t34": 18, "t35": 20, "t36": 19, "t37": 15, "t38": 10, "t39": 11, "t40": 12, "t41": 9, "t42": 17, "t43": 23, "t44": 23, "t45": 16, "t46": 51, "t47": 10, "t48": 17, "t49": 14, "t50": 14, "t51": 12}, {"year": 2013, "t0": 17, "t1": 25, "t2": 30, "t3": 31, "t4": 9, "t5": 11, "t6": 13, "t7": 27, "t8": 9, "t9": 10, "t10": 25, "t11": 10, "t12": 15, "t13": 15, "t14": 11, "t15": 22, "t16": 12, "t17": 10, "t18": 14, "t19": 10, "t20": 10, "t21": 26, "t22": 14, "t23": 12, "t24": 8, "t25": 18, "t26": 8, "t27": 36, "t28": 21, "t29": 21, "t30": 10, "t31": 15, "t32": 8, "t33": 19, "t34": 19, "t35": 20, "t36": 20, "t37": 16, "t38": 10, "t39": 12, "t40": 13, "t41": 9, "t42": 18, "t43": 23, "t44": 24, "t45": 16, "t46": 53, "t47": 10, "t48": 19, "t49": 17, "t50": 14, "t51": 12}, {"year": 2014, "t0": 18, "t1": 26, "t2": 34, "t3": 32, "t4": 10, "t5": 11, "t6": 13, "t7": 27, "t8": 10, "t9": 10, "t10": 27, "t11": 11, "t12": 16, "t13": 17, "t14": 12, "t15": 23, "t16": 13, "t17": 10, "t18": 15, "t19": 11, "t20": 10, "t21": 28, "t22": 15, "t23": 12, "t24": 8, "t25": 18, "t26": 8, "t27": 38, "t28": 21, "t29": 22, "t30": 10, "t31": 15, "t32": 8, "t33": 21, "t34": 20, "t35": 21, "t36": 20, "t37": 16, "t38": 10, "t39": 12, "t40": 13, "t41": 9, "t42": 19, "t43": 24, "t44": 25, "t45": 16, "t46": 55, "t47": 11, "t48": 20, "t49": 20, "t50": 14, "t51": 12}, {"year": 2015, "t0": 19, "t1": 26, "t2": 36, "t3": 33, "t4": 10, "t5": 11, "t6": 13, "t7": 28, "t8": 11, "t9": 11, "t10": 28, "t11": 12, "t12": 16, "t13": 17, "t14": 12, "t15": 22, "t16": 13, "t17": 11, "t18": 16, "t19": 11, "t20": 10, "t21": 31, "t22": 15, "t23": 13, "t24": 8, "t25": 19, "t26": 9, "t27": 38, "t28": 21, "t29": 23, "t30": 10, "t31": 15, "t32": 9, "t33": 22, "t34": 21, "t35": 21, "t36": 20, "t37": 16, "t38": 11, "t39": 12, "t40": 13, "t41": 10, "t42": 20, "t43": 25, "t44": 25, "t45": 16, "t46": 51, "t47": 11, "t48": 22, "t49": 21, "t50": 14, "t51": 13}, {"year": 2016, "t0": 20, "t1": 26, "t2": 39, "t3": 34, "t4": 10, "t5": 12, "t6": 14, "t7": 29, "t8": 11, "t9": 11, "t10": 30, "t11": 12, "t12": 17, "t13": 18, "t14": 13, "t15": 22, "t16": 14, "t17": 11, "t18": 17, "t19": 12, "t20": 11, "t21": 33, "t22": 16, "t23": 13, "t24": 9, "t25": 19, "t26": 9, "t27": 38, "t28": 21, "t29": 24, "t30": 11, "t31": 16, "t32": 9, "t33": 24, "t34": 23, "t35": 21, "t36": 20, "t37": 17, "t38": 11, "t39": 13, "t40": 13, "t41": 10, "t42": 21, "t43": 26, "t44": 26, "t45": 17, "t46": 52, "t47": 11, "t48": 22, "t49": 23, "t50": 15, "t51": 13}, {"year": 2017, "t0": 21, "t1": 26, "t2": 41, "t3": 36, "t4": 11, "t5": 13, "t6": 15, "t7": 29, "t8": 12, "t9": 12, "t10": 32, "t11": 13, "t12": 18, "t13": 20, "t14": 14, "t15": 23, "t16": 15, "t17": 11, "t18": 18, "t19": 13, "t20": 11, "t21": 35, "t22": 17, "t23": 13, "t24": 9, "t25": 20, "t26": 9, "t27": 40, "t28": 22, "t29": 25, "t30": 11, "t31": 16, "t32": 9, "t33": 26, "t34": 26, "t35": 22, "t36": 21, "t37": 17, "t38": 12, "t39": 13, "t40": 14, "t41": 10, "t42": 23, "t43": 26, "t44": 28, "t45": 18, "t46": 55, "t47": 11, "t48": 22, "t49": 25, "t50": 15, "t51": 13}, {"year": 2018, "t0": 23, "t1": 27, "t2": 45, "t3": 38, "t4": 12, "t5": 14, "t6": 15, "t7": 30, "t8": 13, "t9": 12, "t10": 35, "t11": 14, "t12": 19, "t13": 21, "t14": 15, "t15": 23, "t16": 16, "t17": 12, "t18": 19, "t19": 14, "t20": 12, "t21": 38, "t22": 18, "t23": 14, "t24": 9, "t25": 22, "t26": 9, "t27": 41, "t28": 23, "t29": 27, "t30": 12, "t31": 17, "t32": 9, "t33": 27, "t34": 28, "t35": 23, "t36": 22, "t37": 18, "t38": 12, "t39": 14, "t40": 15, "t41": 11, "t42": 25, "t43": 27, "t44": 30, "t45": 19, "t46": 58, "t47": 12, "t48": 22, "t49": 29, "t50": 16, "t51": 14}, {"year": 2019, "t0": 24, "t1": 27, "t2": 45, "t3": 39, "t4": 12, "t5": 14, "t6": 16, "t7": 31, "t8": 13, "t9": 12, "t10": 38, "t11": 14, "t12": 19, "t13": 22, "t14": 16, "t15": 24, "t16": 17, "t17": 12, "t18": 22, "t19": 14, "t20": 13, "t21": 39, "t22": 19, "t23": 14, "t24": 10, "t25": 23, "t26": 10, "t27": 43, "t28": 23, "t29": 29, "t30": 12, "t31": 17, "t32": 10, "t33": 29, "t34": 30, "t35": 24, "t36": 22, "t37": 19, "t38": 13, "t39": 14, "t40": 15, "t41": 11, "t42": 28, "t43": 29, "t44": 31, "t45": 20, "t46": 60, "t47": 12, "t48": 23, "t49": 31, "t50": 17, "t51": 14}, {"year": 2020, "t0": 25, "t1": 28, "t2": 47, "t3": 40, "t4": 13, "t5": 15, "t6": 17, "t7": 31, "t8": 14, "t9": 12, "t10": 40, "t11": 15, "t12": 20, "t13": 24, "t14": 16, "t15": 26, "t16": 17, "t17": 12, "t18": 23, "t19": 15, "t20": 13, "t21": 40, "t22": 20, "t23": 14, "t24": 10, "t25": 24, "t26": 10, "t27": 45, "t28": 24, "t29": 30, "t30": 13, "t31": 18, "t32": 10, "t33": 31, "t34": 33, "t35": 25, "t36": 23, "t37": 19, "t38": 13, "t39": 14, "t40": 16, "t41": 11, "t42": 30, "t43": 30, "t44": 33, "t45": 22, "t46": 61, "t47": 13, "t48": 23, "t49": 32, "t50": 17, "t51": 15}, {"year": 2021, "t0": 29, "t1": 33, "t2": 54, "t3": 47, "t4": 15, "t5": 18, "t6": 19, "t7": 33, "t8": 16, "t9": 14, "t10": 49, "t11": 17, "t12": 23, "t13": 30, "t14": 18, "t15": 31, "t16": 20, "t17": 13, "t18": 27, "t19": 17, "t20": 15, "t21": 47, "t22": 22, "t23": 15, "t24": 11, "t25": 29, "t26": 11, "t27": 50, "t28": 28, "t29": 38, "t30": 14, "t31": 21, "t32": 11, "t33": 36, "t34": 39, "t35": 29, "t36": 26, "t37": 22, "t38": 15, "t39": 16, "t40": 18, "t41": 12, "t42": 36, "t43": 32, "t44": 38, "t45": 26, "t46": 69, "t47": 15, "t48": 24, "t49": 38, "t50": 21, "t51": 17}, {"year": 2022, "t0": 32, "t1": 36, "t2": 60, "t3": 52, "t4": 16, "t5": 21, "t6": 22, "t7": 34, "t8": 17, "t9": 15, "t10": 57, "t11": 18, "t12": 25, "t13": 34, "t14": 19, "t15": 35, "t16": 21, "t17": 14, "t18": 31, "t19": 19, "t20": 17, "t21": 54, "t22": 24, "t23": 16, "t24": 13, "t25": 32, "t26": 12, "t27": 53, "t28": 31, "t29": 44, "t30": 16, "t31": 22, "t32": 12, "t33": 41, "t34": 45, "t35": 32, "t36": 28, "t37": 23, "t38": 17, "t39": 17, "t40": 20, "t41": 13, "t42": 42, "t43": 36, "t44": 42, "t45": 29, "t46": 78, "t47": 16, "t48": 25, "t49": 43, "t50": 23, "t51": 18}]
+var DataSet = {}
+
+DataSet['data'] = inputData;		
+DataSet['labels'] = {
+    //x: [2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006],
+    //y: ["", "25°", "26°", "27°", "28°", "29°", "30°", "31°", "32°", "33°", "34°", "35°", "36°", "37°", "38°", "39°", "40°"],
+    x: [2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],
+    y: ["", "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49"],
+    //z: ["",31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,"09","08","07","06","05","04","03","02","01"]
+z:["", 80,
+ 79,
+ 78,
+ 77,
+ 76,
+ 75,
+ 74,
+ 73,
+ 72,
+ 71,
+ 70,
+ 69,
+ 68,
+ 67,
+ 66,
+ 65,
+ 64,
+ 63,
+ 62,
+ 61,
+ 60,
+ 59,
+ 58,
+ 57,
+ 56,
+ 55,
+ 54,
+ 53,
+ 52,
+ 51,
+ 50,
+ 49,
+ 48,
+ 47,
+ 46,
+ 45,
+ 44,
+ 43,
+ 42,
+ 41,
+ 40,
+ 39,
+ 38,
+ 37,
+ 36,
+ 35,
+ 34,
+ 33,
+ 32,
+ 31,
+ 30,
+ 29,
+ 28,
+ 27,
+ 26,
+ 25,
+ 24,
+ 23,
+ 22,
+ 21,
+ 20,
+ 19,
+ 18,
+ 17,
+ 16,
+ 15,
+ 14,
+ 13,
+ 12,
+ 11,
+ 10,
+ 9,
+ 8,
+ 7,
+ 6,
+ 5,
+ 4,
+ 3,
+ 2,
+ 1]
+
+}
+
+var createScene = function () {
+
+    var scene = new BABYLON.Scene(engine);
+	scene.clearColor = new BABYLON.Color4(0.9,0.9,0.9,1);	
+	
+    var light = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0, 1, 0), scene);
+  
+    var camera = new BABYLON.ArcRotateCamera("Camera", 0.33, 1.33, 350, BABYLON.Vector3.Zero(), scene);
+    camera.attachControl(canvas, true);
+    camera.fov = 1;
+
+    //set points
+    var points =[];
+    for(var i=0;i<DataSet['data'].length;i++)
+    {
+        var x = Object.keys(DataSet['labels']['x']).filter(function(k) { return DataSet['labels']['x'][k] == DataSet['data'][i]["year"];});
+        var xp = DataSet['labels']['x'].length - x[0];
+        var z = 1;
+
+        for(var j in DataSet['data'][i])
+        {
+            if(j=="year") continue;
+            var y = DataSet['data'][i][j]-24;
+            points.push(new BABYLON.Vector3(roundToTwo(xp),roundToTwo(y),roundToTwo(z)));        
+            z++;
+        }
+    }
+
+
+
+ 
+
+
+
+
+    //draw scatterPlot3
+    var scatterPlot3 = new ScatterPlot(DataSet,{width:W,height:H,depth:D}, scene);
+    scatterPlot3.setPosition(new BABYLON.Vector3(W/2,H/2,D/2));
+    scatterPlot3.setColor(BABYLON.Color3.White());
+    scatterPlot3.setScaling(new BABYLON.Vector3(2,2,2));
+        
+    //draw graphic - 3d objects
+    scatterPlot3.draw(points, true);
+
+    //reposition
+    scatterPlot3.setPosition(new BABYLON.Vector3(-W/2,H/2,-2*D+50));
+
+
+    return scene;
+};
+
+var ScatterPlot = function (dataSet, params, scene) {
+	
+    this._scene = scene;
+	this._params = params;
+
+    this.data = dataSet;
+	this.axis = [];
+    this.labels = [];
+    this.shapes = [];
+
+    this.convertToFlatShadedMesh = false;
+    this.gridMaterial = false;
+
+    this.mesh = new BABYLON.Mesh("scatterPlot", this._scene);
+	
+	this._depth = this._params.depth/2, 
+	this._width = this._params.width/2,
+	this._height = this._params.height/2, 
+	this._a = this.data.labels.y.length,
+	this._b = this.data.labels.x.length,
+	this._c = this.data.labels.z.length;
+
+    this._color = new BABYLON.Color3(0.6,0.6,0.6);
+
+    this._addGrid = function (width, height, linesHeight, linesWidth, position, rotation) {
+		
+        var stepw = 2*width/linesWidth,
+        steph = 2*height/linesHeight;
+        var verts = [];
+
+        //width
+        for ( var i = -width; i <= width; i += stepw ) {
+            verts.push([new BABYLON.Vector3( -height, i,0 ), new BABYLON.Vector3( height, i,0 )]);
+        }
+        
+        //height
+        for ( var i = -height; i <= height; i += steph ) {
+            verts.push([new BABYLON.Vector3( i,-width,0 ), new BABYLON.Vector3( i, width, 0 )]);
+        }
+
+        this._BBJSaddGrid(verts, position, rotation);   
+	};
+
+    this._BBJSaddGrid = function (verts, position, rotation){
+
+        var line = BABYLON.MeshBuilder.CreateLineSystem("linesystem", {lines: verts, updatable: false}, this._scene); 
+        line.color = this._color;
+        
+        line.position = position;
+        line.rotation = rotation;
+	    line.parent = this.mesh;
+        this.axis.push(line);
+    };
+
+    this._addLabel = function (length, data, axis, position) { 
+        
+        var diff = 2*length/data.length,
+        p = new BABYLON.Vector3.Zero(),
+        parent = new BABYLON.Mesh("label_"+axis, this._scene);
+
+        for ( var i = 0; i < data.length; i ++ ) {
+            var label = this._BBJSaddLabel(data[i]);
+            label.position = p.clone();
+
+            switch(axis.toLowerCase()){
+                case "x":
+                    p.subtractInPlace(new BABYLON.Vector3(diff,0,0));
+                    break;
+                case "y":
+                    p.addInPlace(new BABYLON.Vector3(0, diff, 0));
+                    break;
+                case "z":
+                    p.subtractInPlace(new BABYLON.Vector3(0,0,diff));
+                    break;
+            }
+            label.parent =  parent;
+        }
+        parent.position = position;
+        parent.parent = this.mesh;
+        this.labels.push(parent);
+    };
+
+    this._BBJSaddLabel = function(text){
+        var outputplane = BABYLON.Mesh.CreatePlane("outputplane", 10, this._scene, false);
+        outputplane.billboardMode = BABYLON.AbstractMesh.BILLBOARDMODE_ALL;
+        outputplane.material = new BABYLON.StandardMaterial("outputplane", this._scene);
+
+        const outputplaneTexture = new BABYLON.DynamicTexture("dynamic texture", 512, this._scene, true, BABYLON.DynamicTexture.TRILINEAR_SAMPLINGMODE);
+        outputplaneTexture.drawText(text, null, null, "normal 250px Helvetica", "black", "transparent", true);
+        
+        outputplane.material.emissiveTexture = outputplaneTexture;
+        outputplane.material.opacityTexture = outputplaneTexture;
+        outputplane.material.backFaceCulling = true;
+        outputplane.material.disableLighting = true;
+        outputplane.material.freeze();
+
+        return outputplane;           
+    };
+    
+    this.setColor = function (color3){
+        if(this.axis.length>0){
+            for(var i=0;i<this.axis.length;i++){
+                this.axis[i].color = color3;
+            }    
+        }
+    };
+
+    this.setPosition = function (vector3){
+        if(this.mesh){
+            this.mesh.position = vector3;
+        }
+    };
+
+    this.setScaling = function (vector3){
+        if(this.mesh){
+            this.mesh.scaling = vector3;
+        }
+    };
+
+    this.draw = function (vector3_array, use_objects){
+        var points = [];
+        if(vector3_array.length > 0){
+            for(var i=0;i<vector3_array.length;i++){
+                points.push(new BABYLON.Vector3(
+                    vector3_array[i].x*(this._params.width/this._b),
+                    vector3_array[i].y*(this._params.height/this._a),
+                    vector3_array[i].z*(this._params.depth/this._c)
+                ));       
+            }
+        }
+        
+        if(points.length>0){
+            if(use_objects){
+                var objects;
+                var sphere = BABYLON.Mesh.CreateSphere("sphere_0", 16, vector3_array[0].x, this._scene); 
+                for(var i=0;i<points.length;i++){
+                    var materialSphere = new BABYLON.StandardMaterial("material_"+i, this._scene); 
+                    var coef = (1-vector3_array[i].y/this._a);
+                    materialSphere.diffuseColor = new BABYLON.Color3(1,coef,0.5);
+                    if(i==0)
+                        objects = sphere;
+                    else
+                        objects = sphere.clone("sphere_"+i);
+                    
+                    if(this.convertToFlatShadedMesh){
+                        objects.convertToFlatShadedMesh();       
+                    }
+                    objects.material = materialSphere;
+                    objects.scaling = new BABYLON.Vector3(vector3_array[i].x/10,vector3_array[i].x/10,vector3_array[i].x/10);
+                    objects.position = points[i].subtractInPlace(this.mesh.position);
+                    objects.parent = this.mesh;
+                    this.shapes.push(objects);
+                }
+            }
+            else
+            {
+                this.useRibbon = true;
+                var faceColors=[];
+                var points_chunk = this._chunk(points, this._c-1);                
+                
+                var ribbon = BABYLON.Mesh.CreateRibbon("ribbon", points_chunk, false, false, 0,  this._scene, true, BABYLON.Mesh.DOUBLESIDE);
+	            
+                var vertexData = new BABYLON.VertexData(); 
+                var pdata = ribbon.getVerticesData(BABYLON.VertexBuffer.PositionKind);
+                
+                for(var i=0;i<pdata.length;i+=3)
+                {
+                    var coef = (1-pdata[i+1]/this._a/8);
+                    faceColors.push(1,coef,0.5,1);
+                }
+                
+                vertexData.colors=faceColors; 
+                vertexData.applyToMesh(ribbon, true);
+                ribbon.useVertexColors = true;
+
+                if(this.convertToFlatShadedMesh){
+                    ribbon.convertToFlatShadedMesh();       
+                }
+                
+                if(this.gridMaterial){
+                    var mat = new BABYLON.GridMaterial("grid", this._scene);	
+                    mat.gridRatio = 2;
+                    mat.majorUnitFrequency = 1;
+                    mat.minorUnitVisibility = 0.1;
+                    mat.opacity = 0.98;
+                    mat.mainColor = new BABYLON.Color3(1, 1, 1);
+	                mat.lineColor = new BABYLON.Color3(1.0, 1.0, 1.0);  
+                }else{
+                    var mat = new BABYLON.StandardMaterial("standard", this._scene);
+                    mat.specularColor = new BABYLON.Color3();
+                }
+
+                mat.backFaceCulling = false; 
+                ribbon.material = mat;  
+                ribbon.position.subtractInPlace(this.mesh.position);
+                ribbon.parent = this.mesh;
+                this.shapes.push(ribbon);
+            }
+        }        
+    };
+
+    this._chunk = function (arr, chunkSize) {
+        var R = [];
+        for (var i=0,len=arr.length; i<len; i+=chunkSize)
+            R.push(arr.slice(i,i+chunkSize));
+        return R;
+    };
+
+    //create items
+	this._addGrid(this._height, this._width, this._b, this._a, new BABYLON.Vector3(0,0,-this._depth), BABYLON.Vector3.Zero());
+    this._addGrid(this._depth, this._width, this._b, this._c, new BABYLON.Vector3(0,-this._height,0), new BABYLON.Vector3(Math.PI/2,0,0));
+    this._addGrid(this._height, this._depth, this._c, this._a, new BABYLON.Vector3(-this._width,0,0), new BABYLON.Vector3(0,Math.PI/2,0));				
+    
+    this._addLabel(this._width, this.data.labels.x, "x", new BABYLON.Vector3(this._width,-(this._height+2),-this._depth));
+    this._addLabel(this._height, this.data.labels.y, "y", new BABYLON.Vector3(this._width,-this._height,-(this._depth+4)));
+    this._addLabel(this._depth, this.data.labels.z, "z", new BABYLON.Vector3(this._width+2,-(this._height+2),this._depth));
+
+    return this;
+}
+
+function roundToTwo(num) {    
+    return +(Math.round(num + "e+2")  + "e-2");
+};
+
+function showWorldAxis(size) {
+    var makeTextPlane = function(text, color, size) {
+        var dynamicTexture = new BABYLON.DynamicTexture("DynamicTexture", 50, scene, true);
+        dynamicTexture.hasAlpha = true;
+        dynamicTexture.drawText(text, 5, 40, "bold 36px Arial", color , "transparent", true);
+        var plane = BABYLON.Mesh.CreatePlane("TextPlane", size, scene, true);
+        plane.material = new BABYLON.StandardMaterial("TextPlaneMaterial", scene);
+        plane.material.backFaceCulling = false;
+        plane.material.specularColor = new BABYLON.Color3(0, 0, 0);
+        plane.material.diffuseTexture = dynamicTexture;
+    return plane;
+     };
+    var axisX = BABYLON.Mesh.CreateLines("axisX", [ 
+      BABYLON.Vector3.Zero(), new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, 0.05 * size, 0), 
+      new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, -0.05 * size, 0)
+      ], scene);
+    axisX.color = new BABYLON.Color3(1, 0, 0);
+    var xChar = makeTextPlane("X", "red", size / 10);
+    xChar.position = new BABYLON.Vector3(0.9 * size, -0.05 * size, 0);
+    var axisY = BABYLON.Mesh.CreateLines("axisY", [
+        BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3( -0.05 * size, size * 0.95, 0), 
+        new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3( 0.05 * size, size * 0.95, 0)
+        ], scene);
+    axisY.color = new BABYLON.Color3(0, 1, 0);
+    var yChar = makeTextPlane("Y", "green", size / 10);
+    yChar.position = new BABYLON.Vector3(0, 0.9 * size, -0.05 * size);
+    var axisZ = BABYLON.Mesh.CreateLines("axisZ", [
+        BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3( 0 , -0.05 * size, size * 0.95),
+        new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3( 0, 0.05 * size, size * 0.95)
+        ], scene);
+    axisZ.color = new BABYLON.Color3(0, 0, 1);
+    var zChar = makeTextPlane("Z", "blue", size / 10);
+    zChar.position = new BABYLON.Vector3(0, 0.05 * size, 0.9 * size);
+};
